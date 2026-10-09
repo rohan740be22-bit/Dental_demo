@@ -1,0 +1,1 @@
+UPDATE public.dentists SET slug='arjun-mehta', name='Dr. Arjun Mehta' WHERE slug='vikram-mehta';
