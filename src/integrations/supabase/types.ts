@@ -14,7 +14,138 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      appointments: {
+        Row: {
+          booking_reference: string
+          created_at: string
+          dentist_id: string
+          end_at: string
+          id: string
+          notes: string | null
+          patient_email: string | null
+          patient_name: string
+          patient_phone: string | null
+          service_id: string
+          source: string
+          start_at: string
+          status: string
+          timezone: string
+          updated_at: string
+        }
+        Insert: {
+          booking_reference: string
+          created_at?: string
+          dentist_id: string
+          end_at: string
+          id?: string
+          notes?: string | null
+          patient_email?: string | null
+          patient_name: string
+          patient_phone?: string | null
+          service_id: string
+          source: string
+          start_at: string
+          status?: string
+          timezone?: string
+          updated_at?: string
+        }
+        Update: {
+          booking_reference?: string
+          created_at?: string
+          dentist_id?: string
+          end_at?: string
+          id?: string
+          notes?: string | null
+          patient_email?: string | null
+          patient_name?: string
+          patient_phone?: string | null
+          service_id?: string
+          source?: string
+          start_at?: string
+          status?: string
+          timezone?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointments_dentist_id_fkey"
+            columns: ["dentist_id"]
+            isOneToOne: false
+            referencedRelation: "dentists"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      dentists: {
+        Row: {
+          bio: string
+          id: string
+          languages: string[]
+          name: string
+          service_slugs: string[]
+          slug: string
+          sort_order: number
+          specialization: string
+          title: string
+        }
+        Insert: {
+          bio: string
+          id?: string
+          languages?: string[]
+          name: string
+          service_slugs?: string[]
+          slug: string
+          sort_order?: number
+          specialization: string
+          title: string
+        }
+        Update: {
+          bio?: string
+          id?: string
+          languages?: string[]
+          name?: string
+          service_slugs?: string[]
+          slug?: string
+          sort_order?: number
+          specialization?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          duration_minutes: number
+          id: string
+          name: string
+          slug: string
+          sort_order: number
+          summary: string
+        }
+        Insert: {
+          duration_minutes?: number
+          id?: string
+          name: string
+          slug: string
+          sort_order?: number
+          summary: string
+        }
+        Update: {
+          duration_minutes?: number
+          id?: string
+          name?: string
+          slug?: string
+          sort_order?: number
+          summary?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
