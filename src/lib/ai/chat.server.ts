@@ -97,7 +97,7 @@ const tools = {
 };
 
 export async function handleChat(request: Request) {
-  const apiKey = process.env.LOVABLE_API_KEY;
+  const apiKey = process.env['LOVABLE_API_KEY'];
   if (!apiKey) return Response.json({ error: "The assistant isn't configured yet." }, { status: 500 });
   let messages: UIMessage[];
   try {
