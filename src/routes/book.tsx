@@ -10,12 +10,12 @@ import { useChatWidget } from "@/components/site/chat-context";
 import { bookAppointment, fetchAvailability } from "@/lib/booking.functions";
 import { DENTISTS, SERVICES } from "@/lib/clinic";
 
-type Search = { service?: string; dentist?: string };
+type Search = { service?: string | undefined; dentist?: string | undefined };
 
 export const Route = createFileRoute("/book")({
   validateSearch: (s: Record<string, unknown>): Search => ({
-    service: typeof s.service === "string" ? s.service : undefined,
-    dentist: typeof s.dentist === "string" ? s.dentist : undefined,
+    service: typeof s["service"] === "string" ? s["service"] : undefined,
+    dentist: typeof s["dentist"] === "string" ? s["dentist"] : undefined,
   }),
   head: () => ({
     meta: [

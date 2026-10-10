@@ -44,7 +44,7 @@ function Home() {
             Personalised dental care in a comfortable, modern environment. Discover thoughtful treatment, clear guidance, and care designed around you.
           </p>
           <div className="flex flex-wrap gap-3">
-            <Button asChild size="xl"><Link to="/book">Book an appointment</Link></Button>
+            <Button asChild size="xl"><Link to="/book" search={{}}>Book an appointment</Link></Button>
             <Button asChild size="xl" variant="outline"><Link to="/services">Explore our services</Link></Button>
           </div>
           <button onClick={() => ask("I'd like to book an appointment")} className="flex items-center gap-2 text-sm text-primary hover:underline">
@@ -170,7 +170,7 @@ function Home() {
             <h2 className="text-3xl font-semibold">Ready when you are.</h2>
             <p className="flex items-center gap-2 opacity-80"><MapPin className="size-4" /> {CLINIC.address}</p>
           </div>
-          <Button asChild size="xl" variant="secondary"><Link to="/book">Book an appointment</Link></Button>
+          <Button asChild size="xl" variant="secondary"><Link to="/book" search={{}}>Book an appointment</Link></Button>
         </div>
       </section>
     </>

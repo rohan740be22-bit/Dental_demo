@@ -31,7 +31,7 @@ function ContactPage() {
           <Item icon={Clock} title="Opening hours">{CLINIC.hours.map((h) => <span key={h.days} className="block">{h.days}: {h.time}</span>)}</Item>
           <Item icon={Accessibility} title="Parking & access">{CLINIC.parking}</Item>
           <Item icon={Siren} title="Emergencies">{CLINIC.emergency}</Item>
-          <Button asChild size="xl"><Link to="/book">Book an appointment</Link></Button>
+          <Button asChild size="xl"><Link to="/book" search={{}}>Book an appointment</Link></Button>
         </div>
         <iframe title="Clinic location map" src={CLINIC.mapEmbed} className="h-[420px] w-full rounded-2xl border border-border lg:h-full" loading="lazy" />
       </div>
