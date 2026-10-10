@@ -15,6 +15,12 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/90 backdrop-blur">
+      <div className="hidden bg-primary text-primary-foreground md:block">
+        <div className="container-page flex h-9 items-center justify-between text-xs">
+          <span>{CLINIC.address}</span>
+          <span>Mon–Fri 9 AM–6 PM · Sat 9 AM–2 PM · New patients welcome</span>
+        </div>
+      </div>
       <div className="container-page flex h-16 items-center justify-between gap-6">
         <Link to="/" className="flex items-center gap-2.5" aria-label={`${CLINIC.name} home`}>
           <Logo />
