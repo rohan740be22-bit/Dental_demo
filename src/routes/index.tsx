@@ -1,5 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Clock, HeartHandshake, MapPin, MessageCircle, ShieldCheck, Sparkles as _s, Star, Stethoscope } from "lucide-react";
+import { ArrowRight, Baby, Clock, Gem, HeartHandshake, MapPin, MessageCircle, Phone, ShieldCheck, Smile, Sparkles as _s, Star, Stethoscope, Sun, Syringe } from "lucide-react";
+import galleryReception from "@/assets/gallery-reception.jpg";
+import galleryEquipment from "@/assets/gallery-equipment.jpg";
+import galleryCare from "@/assets/gallery-care.jpg";
 import hero from "@/assets/hero-clinic.jpg";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -17,6 +20,10 @@ export const Route = createFileRoute("/")({
   }),
   component: Home,
 });
+
+const ICONS: Record<string, typeof Smile> = {
+  "general-dentistry": Stethoscope, cleaning: Sun, whitening: Smile, implants: Gem, orthodontics: Smile, "root-canal": Syringe, cosmetic: Gem, pediatric: Baby, emergency: Clock,
+};
 
 const WHY = [
   { icon: HeartHandshake, title: "Unhurried appointments", text: "Time to listen, explain and plan together." },
@@ -81,6 +88,7 @@ function Home() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.slice(0, 6).map((s) => (
             <Link key={s.slug} to="/services/$slug" params={{ slug: s.slug }} className="group rounded-xl border border-border bg-card p-6 transition-all hover:-translate-y-0.5 hover:shadow-soft">
+              {(() => { const I = ICONS[s.slug] ?? Stethoscope; return <div className="mb-5 flex size-11 items-center justify-center rounded-lg bg-accent text-accent-foreground"><I className="size-5" /></div>; })()}
               <h3 className="mb-2 text-lg font-semibold">{s.name}</h3>
               <p className="mb-5 text-sm leading-relaxed text-muted-foreground">{s.summary}</p>
               <span className="flex items-center gap-1 text-sm text-primary">Learn more <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" /></span>
@@ -147,6 +155,19 @@ function Home() {
         </div>
       </section>
 
+      {/* Gallery */}
+      <section className="container-page py-20">
+        <div className="mb-10 space-y-3">
+          <p className="eyebrow">Inside the studio</p>
+          <h2 className="text-3xl font-semibold md:text-4xl">A calm space, designed for comfort</h2>
+        </div>
+        <div className="grid gap-4 md:grid-cols-3 md:grid-rows-2">
+          <img src={galleryReception} alt="Clinic reception and waiting area" loading="lazy" width={1200} height={912} className="h-full min-h-64 w-full rounded-xl object-cover md:col-span-2 md:row-span-2" />
+          <img src={galleryCare} alt="Dentist explaining treatment to a patient" loading="lazy" width={1200} height={912} className="aspect-[4/3] w-full rounded-xl object-cover" />
+          <img src={galleryEquipment} alt="Sterilised dental instruments" loading="lazy" width={1200} height={912} className="aspect-[4/3] w-full rounded-xl object-cover" />
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="container-page grid gap-10 py-20 md:grid-cols-[1fr_1.4fr]">
         <div className="space-y-3">
@@ -163,8 +184,25 @@ function Home() {
         </Accordion>
       </section>
 
+      {/* Location */}
+      <section className="bg-secondary py-20">
+        <div className="container-page grid gap-10 lg:grid-cols-[1fr_1.3fr]">
+          <div className="space-y-6">
+            <p className="eyebrow">Visit us</p>
+            <h2 className="text-3xl font-semibold md:text-4xl">Find the studio</h2>
+            <div className="space-y-4 text-sm">
+              <p className="flex gap-3"><MapPin className="size-5 shrink-0 text-primary" />{CLINIC.address}</p>
+              <p className="flex gap-3"><Phone className="size-5 shrink-0 text-primary" /><a href={CLINIC.phoneHref} className="hover:underline">{CLINIC.phone}</a></p>
+              <div className="flex gap-3"><Clock className="size-5 shrink-0 text-primary" /><div>{CLINIC.hours.map((h) => <p key={h.days}><span className="font-medium">{h.days}:</span> <span className="text-muted-foreground">{h.time}</span></p>)}</div></div>
+            </div>
+            <Button asChild variant="outline" className="rounded-full"><a href={CLINIC.directions} target="_blank" rel="noreferrer">Get directions</a></Button>
+          </div>
+          <iframe title="Clinic location map" src={CLINIC.mapEmbed} loading="lazy" className="h-80 w-full rounded-2xl border border-border lg:h-full" />
+        </div>
+      </section>
+
       {/* CTA */}
-      <section className="container-page pb-20">
+      <section className="container-page py-20">
         <div className="flex flex-col items-start justify-between gap-6 rounded-2xl bg-primary p-10 text-primary-foreground md:flex-row md:items-center md:p-14">
           <div className="space-y-2">
             <h2 className="text-3xl font-semibold">Ready when you are.</h2>
