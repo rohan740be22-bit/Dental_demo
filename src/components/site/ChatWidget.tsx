@@ -127,7 +127,7 @@ function ChatPanel() {
                     return (
                       <div key={i}>
                         <Tool defaultOpen={false}>
-                          <ToolHeader type={p.type} state={p.state} />
+                          <ToolHeader {...(p.type === "dynamic-tool" ? { type: p.type, state: p.state, toolName: p.toolName } : { type: p.type, state: p.state })} />
                           <ToolContent>
                             <ToolInput input={p.input} />
                             <ToolOutput output={p.output} errorText={p.errorText} />

@@ -36,7 +36,7 @@ export function SiteHeader() {
             <Phone className="size-4" /> {CLINIC.phone}
           </a>
           <Button asChild className="rounded-full px-5">
-            <Link to="/book">Book appointment</Link>
+            <Link to="/book" search={{}}>Book appointment</Link>
           </Button>
         </div>
         <button
@@ -60,7 +60,7 @@ export function SiteHeader() {
               <Phone className="size-4" /> {CLINIC.phone}
             </a>
             <Button asChild size="xl" className="mt-2">
-              <Link to="/book" onClick={() => setOpen(false)}>Book appointment</Link>
+              <Link to="/book" search={{}} onClick={() => setOpen(false)}>Book appointment</Link>
             </Button>
           </div>
         </nav>

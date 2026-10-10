@@ -8,7 +8,7 @@ async function db(): Promise<Admin> {
 }
 
 function localToUtc(date: string, minutes: number) {
-  const [y, m, d] = date.split("-").map(Number);
+  const [y = 0, m = 1, d = 1] = date.split("-").map(Number);
   return new Date(Date.UTC(y, m - 1, d, 0, minutes - OFFSET_MIN));
 }
 export function formatLocal(iso: string) {
@@ -30,7 +30,7 @@ export function todayLocal() {
 }
 
 function openingWindows(date: string): [number, number][] {
-  const [y, m, d] = date.split("-").map(Number);
+  const [y = 0, m = 1, d = 1] = date.split("-").map(Number);
   const dow = new Date(Date.UTC(y, m - 1, d)).getUTCDay();
   if (dow === 0) return [];
   if (dow === 6) return [[9 * 60, 14 * 60]];
@@ -106,7 +106,7 @@ export async function createAppointment(input: {
   if (isNaN(start.getTime())) return { ok: false as const, error: "Invalid start time." };
 
   const localDate = new Date(start.getTime() + OFFSET_MIN * 60000).toISOString().slice(0, 10);
-  const avail = await getAvailability({ serviceSlug: input.serviceSlug, date: localDate, dentistSlug: input.dentistSlug });
+  const avail = await getAvailability({ serviceSlug: input.serviceSlug, date: localDate, dentistSlug: input.dentistSlug ?? null });
   if ("error" in avail && avail.error) return { ok: false as const, error: avail.error };
   const slot = avail.slots?.find((s) => s.start === start.toISOString());
   if (!slot) return { ok: false as const, error: "That time is no longer available. Please choose another slot." };
